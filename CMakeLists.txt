@@ -2,5 +2,18 @@ cmake_minimum_required(VERSION 3.5)
 project("Data Structures" VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-include_directories(${PROJECT_SOURCE_DIR}/include)
 add_executable(data_structures src/main.cpp)
+target_include_directories(data_structures PRIVATE ${PROJECT_SOURCE_DIR}/include)
+
+# 添加测试
+add_subdirectory(third_party/googletest)
+include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+enable_testing()
+add_executable(runTests 
+test/test_main.cpp
+src/graph/edge.cpp
+src/graph/directed_graph.cpp
+test/graph/test_directed_graph.cpp
+)
+target_link_libraries(runTests gtest gtest_main)
+target_include_directories(runTests PRIVATE ${PROJECT_SOURCE_DIR}/include)
