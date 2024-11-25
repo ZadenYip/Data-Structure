@@ -1,12 +1,12 @@
 # Data Structure
 
-个人使用以及尝试编写的C++数据结构库
+个人使用以及尝试编写的C++数据结构库<br>
 A personal C++ data structure library for practice and experimentation.
 
 
 ## License
 
-本项目使用 MIT 许可证 - 详情请参见 [LICENSE](LICENSE) 文件。
+本项目使用 MIT 许可证 - 详情请参见 [LICENSE](LICENSE) 文件。<br>
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ```
