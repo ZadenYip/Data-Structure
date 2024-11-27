@@ -1,5 +1,7 @@
 #include "graph/directed_graph.h"
 
+#include <vector>
+
 namespace data_structures {
 DirectedGraph::DirectedGraph(int num_vertices)
     : num_vertices_(num_vertices), num_edges_(0) {
@@ -20,8 +22,18 @@ std::vector<int> DirectedGraph::GetNeighbors(int vertex) const {
     return neighbors;
 }
 
-void DirectedGraph::AddEdge(int from, int to) {
-    adjacency_edge[from].push_back(Edge(from, to));
+std::vector<Edge> DirectedGraph::GetNeighborsEdges(int vertex) const {
+    std::vector<Edge> edges;
+    for (Edge edge : adjacency_edge[vertex]) {
+        edges.push_back(edge);
+    }
+    return edges;
+}
+
+void DirectedGraph::AddEdge(int from, int to) { AddEdge(from, to, -1.0); }
+
+void DirectedGraph::AddEdge(int from, int to, double weight) {
+    adjacency_edge[from].push_back(Edge(from, to, weight));
     num_edges_++;
 }
 
