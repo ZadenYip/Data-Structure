@@ -12,8 +12,11 @@ enable_testing()
 add_executable(runTests 
 test/test_main.cpp
 src/graph/edge.cpp
+src/graph/edge.cpp
 src/graph/directed_graph.cpp
+src/graph/algorithm/shortest_path/dijkstra.cpp
 test/graph/test_directed_graph.cpp
+test/graph/algorithm/shortest_path/test_dijkstra.cpp
 )
 target_link_libraries(runTests gtest gtest_main)
 target_include_directories(runTests PRIVATE ${PROJECT_SOURCE_DIR}/include)

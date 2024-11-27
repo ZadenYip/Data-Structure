@@ -2,6 +2,7 @@
 #include <list>
 #include <vector>
 
+#include "edge.h"
 #include "graph/edge.h"
 
 namespace data_structures {
@@ -18,7 +19,9 @@ class DirectedGraph {
     int GetNumVertices() const;
     int GetEdgeCount() const;
     void AddEdge(int from, int to);
+    void AddEdge(int from, int to, double weight);
     std::vector<int> GetNeighbors(int vertex) const;
+    std::vector<Edge> GetNeighborsEdges(int vertex) const;
     bool HasEdge(int from, int to) const;
 };
 }  // namespace data_structures
