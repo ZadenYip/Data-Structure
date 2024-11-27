@@ -1,9 +1,9 @@
 namespace data_structures {
 class Edge {
    private:
-    int from;
-    int to;
-    double weight;
+    int from_;
+    int to_;
+    double weight_;
 
    public:
     Edge(int from, int to, double weight);
