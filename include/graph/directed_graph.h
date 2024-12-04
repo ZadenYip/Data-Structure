@@ -9,12 +9,13 @@ namespace data_structures {
 
 class DirectedGraph {
    private:
-    std::list<Edge> *adjacency_edge;
+    std::vector<std::list<Edge>> adjacency_edge;
     int num_vertices_;
     int num_edges_;
 
    public:
     ~DirectedGraph();
+    DirectedGraph();
     DirectedGraph(int num_vertices);
     int GetNumVertices() const;
     int GetEdgeCount() const;

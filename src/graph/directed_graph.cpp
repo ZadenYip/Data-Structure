@@ -3,12 +3,15 @@
 #include <vector>
 
 namespace data_structures {
+
+DirectedGraph::DirectedGraph() : num_vertices_(0), num_edges_(0) {}
+
 DirectedGraph::DirectedGraph(int num_vertices)
     : num_vertices_(num_vertices), num_edges_(0) {
-    adjacency_edge = new std::list<Edge>[num_vertices];
+    adjacency_edge = std::vector<std::list<Edge>>(num_vertices);
 }
 
-DirectedGraph::~DirectedGraph() { delete[] adjacency_edge; }
+DirectedGraph::~DirectedGraph() {}
 
 int DirectedGraph::GetNumVertices() const { return num_vertices_; }
 
