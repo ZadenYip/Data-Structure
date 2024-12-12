@@ -1,5 +1,6 @@
 #include "graph/shortest_path/dijkstra.h"
 
+#include <iostream>
 #include <stack>
 
 namespace data_structures {

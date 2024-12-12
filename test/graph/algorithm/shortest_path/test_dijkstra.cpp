@@ -1,6 +1,4 @@
-#include <iostream>
 #include <stack>
-#include <vector>
 #define ENABLE_TESTING
 #include "graph/shortest_path/dijkstra.h"
 #include "gtest/gtest.h"
