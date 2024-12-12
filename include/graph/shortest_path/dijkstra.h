@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "graph/directed_graph.h"
-#include "gtest/gtest.h"
 
 /* 使用 FRIEND_TEST 宏声明友元测试 */
 #ifdef ENABLE_TESTING
