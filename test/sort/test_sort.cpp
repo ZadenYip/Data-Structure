@@ -3,6 +3,7 @@
 #include <functional>
 
 #include "sort/select_sort.h"
+#include "sort/insert_sort.h"
 
 namespace data_structures {
 class SortTest : public ::testing::Test {
@@ -19,6 +20,17 @@ TEST_F(SortTest, SelectSort) {
     // a > b, return true means a has higher priority
     SelectSort<int> select_sort = SelectSort<int>(std::greater<int>());
     select_sort.sort(data, length);
+    int expected[] = {1, 2, 3, 4, 5};
+    for (int i = 0; i < length; i++) {
+        EXPECT_EQ(data[i], expected[i]);
+    }
+}
+
+TEST_F(SortTest, InsertSort) {
+    int data[] = {3, 2, 1, 5, 4};
+    int length = 5;
+    InsertSort<int> insert_sort = InsertSort<int>(std::greater<int>());
+    insert_sort.sort(data, length);
     int expected[] = {1, 2, 3, 4, 5};
     for (int i = 0; i < length; i++) {
         EXPECT_EQ(data[i], expected[i]);
