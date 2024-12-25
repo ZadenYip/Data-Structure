@@ -18,8 +18,6 @@ class SelectSort : public BaseSort<T> {
         for (int i = 0; i < length; i++) {
             int min_index = i;
             for (int j = i; j < length; j++) {
-                int a = *data[min_index];
-                int b = *data[j];
                 if (this->priority_comparator_(*data[min_index], *data[j])) {
                     min_index = j;
                 }
