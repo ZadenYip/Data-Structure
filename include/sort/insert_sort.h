@@ -12,6 +12,7 @@ class InsertSort : public BaseSort<T> {
      */
     InsertSort(std::function<bool(const T&, const T&)> priority_comparator)
         : BaseSort<T>(priority_comparator) {}
+        
     void sort(T* data[], int length) override {
         for (int solving = 1; solving < length; solving++) {
             for (int insert = solving;
