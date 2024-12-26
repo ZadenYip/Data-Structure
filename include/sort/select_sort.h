@@ -14,6 +14,7 @@ class SelectSort : public BaseSort<T> {
      */
     SelectSort(std::function<bool(const T&, const T&)> priority_comparator)
         : BaseSort<T>(priority_comparator) {}
+
     void sort(T* data[], int length) override {
         for (int i = 0; i < length; i++) {
             int min_index = i;
@@ -25,6 +26,7 @@ class SelectSort : public BaseSort<T> {
             this->swap(data[i], data[min_index]);
         }
     }
+    
     ~SelectSort() {}
 };
 }  // namespace data_structures

@@ -5,20 +5,9 @@
 
 #include "graph/directed_graph.h"
 
-/* 使用 FRIEND_TEST 宏声明友元测试 */
-#ifdef ENABLE_TESTING
-#include "gtest/gtest.h"
-#define FRIEND_TEST_FUNCTION(test_name) \
-    ;                                   \
-    FRIEND_TEST(DijkstraTest, test_name);
-#else
-#define FRIEND_TEST_FUNCTION(test_name) ;
-#endif
-
 namespace data_structures {
 class Dijkstra {
    private:
-    FRIEND_TEST_FUNCTION(TestHasPathTo);
     const DirectedGraph &graph_;
     int source_;
     Edge *edge_to_last_;

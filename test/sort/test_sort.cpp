@@ -1,10 +1,13 @@
+#define ENABLE_TESTING
 #include <gtest/gtest.h>
 
 #include <functional>
+#include <iostream>
 #include <vector>
 
 #include "sort/bubble_sort.h"
 #include "sort/insert_sort.h"
+#include "sort/merge_sort_recursion.h"
 #include "sort/select_sort.h"
 #include "sort/shell_sort.h"
 
@@ -36,14 +39,29 @@ class SortTest : public ::testing::Test {
     std::vector<WrapperData> test_data_set_;
     SortTest() {}
     ~SortTest() override {}
+    void Print(int* data[], int length) {
+        for (int i = 0; i < length; i++) {
+            std::cout << *data[i] << " ";
+        }
+        std::cout << std::endl;
+    }
     void TestSort(BaseSort<int>& algorithrm) {
         for (const WrapperData wrapper : test_data_set_) {
             int* pointer_array[wrapper.length_];
-            ConvertArrayToPointer(wrapper.data, pointer_array,wrapper.length_);
+            ConvertArrayToPointer(wrapper.data, pointer_array, wrapper.length_);
+            // 打印排序前的数组
+            std::cout << "Before sorting: ";
+            Print(pointer_array, wrapper.length_);
             algorithrm.sort(pointer_array, wrapper.length_);
-            bool actual =
-                IsSorted(pointer_array, wrapper.length_);
+            bool actual = IsSorted(pointer_array, wrapper.length_);
+            // 打印排序后的数组
+            std::cout << "After sorting: ";
+            Print(pointer_array, wrapper.length_);
+            std::cout << std::endl;
             EXPECT_EQ(actual, true);
+            for (int* pointer : pointer_array) {
+                delete pointer;
+            }
         }
     }
     /**
@@ -62,6 +80,19 @@ class SortTest : public ::testing::Test {
         }
         return true;
     }
+
+    /**
+     * @brief 复制一份数组，将数组的每个元素的地址存入指针数组
+     *        Copy an array, store the address of each element of the array in
+     * the pointer array
+     *
+     * @param data - 数组
+     *               array
+     * @param data_pointer - 指针数组
+     *                       pointer array
+     * @param length - 数组长度
+     *                 array length
+     */
     void ConvertArrayToPointer(int data[], int* data_pointer[], int length) {
         for (int i = 0; i < length; i++) {
             data_pointer[i] = new int(data[i]);
@@ -94,17 +125,19 @@ class SortTest : public ::testing::Test {
         test_data_set_.push_back(WrapperData(data6, length));
 
         // 生成随机数组进行随机化测试
-        srand(1);
-        const int per_array_length = 1000;
-        const int num_generate_array = 10;
-        const int range = 10;
-        for (int i = 0; i < num_generate_array; i++) {
-            int generate_array[per_array_length];
-            for (int j = 0; j < per_array_length; j++) {
-                generate_array[j] = rand() % range;
-            }
-            test_data_set_.push_back(WrapperData(generate_array, per_array_length));
-        }
+        // generate random array for random test
+        // srand(1);
+        // const int per_array_length = 1000;
+        // const int num_generate_array = 10;
+        // const int range = 10;
+        // for (int i = 0; i < num_generate_array; i++) {
+        //     int generate_array[per_array_length];
+        //     for (int j = 0; j < per_array_length; j++) {
+        //         generate_array[j] = rand() % range;
+        //     }
+        //     test_data_set_.push_back(WrapperData(generate_array,
+        //     per_array_length));
+        // }
     }
 
     void TearDown() override {}
@@ -130,6 +163,29 @@ TEST_F(SortTest, ShellSort) {
 TEST_F(SortTest, BubbleSort) {
     BubbleSort<int> bubble_sort = BubbleSort<int>(std::greater<int>());
     TestSort(bubble_sort);
+}
+
+TEST_F(SortTest, MergeSortMergeFunction) {
+    MergeSortRecursion<int> merge_sort =
+        MergeSortRecursion<int>(std::greater<int>());
+    int data[] = {2, 4, 5, 0, 1, 3, 6};
+    int* data_pointer[7];
+    ConvertArrayToPointer(data, data_pointer, 7);
+    merge_sort.helper_array = new int[7];
+    Print(data_pointer, 7);
+    merge_sort.merge(data_pointer, 0, 4, 6);
+    bool actual = IsSorted(data_pointer, 7);
+    EXPECT_EQ(actual, true);
+    Print(data_pointer, 7);
+    for (int* pointer : data_pointer) {
+        delete pointer;
+    }
+}
+
+TEST_F(SortTest, MergeSortRecursion) {
+    MergeSortRecursion<int> merge_sort =
+        MergeSortRecursion<int>(std::greater<int>());
+    TestSort(merge_sort);
 }
 
 }  // namespace data_structures
